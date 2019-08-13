@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hichat.provider.mapper.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.hichat.common.pojo.Message">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="from_user_id" property="fromUserId" jdbcType="BIGINT"/>
+        <result column="to_user_id" property="toUserId" jdbcType="BIGINT"/>
+        <result column="message" property="message" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="read_flag" property="readFlag" jdbcType="VARCHAR"/>
+        <result column="msg_type" property="msgType" jdbcType="INTEGER"/>
+        <result column="small_img" property="smallImg" jdbcType="VARCHAR"/>
+        <result column="fromUserName" property="fromUserName" jdbcType="VARCHAR"/>
+        <result column="toUserName" property="toUserName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, from_user_id, to_user_id, message, create_time, read_flag, msg_type, small_img
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hichat.common.pojo.MessageExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from h_message
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from h_message
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from h_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.hichat.common.pojo.MessageExample">
+        delete from h_message
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.hichat.common.pojo.Message">
+    insert into h_message (id, from_user_id, to_user_id, 
+      message, read_flag,
+      msg_type, small_img)
+    values (#{id,jdbcType=BIGINT}, #{fromUserId,jdbcType=BIGINT}, #{toUserId,jdbcType=BIGINT}, 
+      #{message,jdbcType=VARCHAR},  #{readFlag,jdbcType=VARCHAR},
+      #{msgType,jdbcType=INTEGER}, #{smallImg,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hichat.common.pojo.Message">
+        insert into h_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fromUserId != null">
+                from_user_id,
+            </if>
+            <if test="toUserId != null">
+                to_user_id,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="readFlag != null">
+                read_flag,
+            </if>
+            <if test="msgType != null">
+                msg_type,
+            </if>
+            <if test="smallImg != null">
+                small_img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="fromUserId != null">
+                #{fromUserId,jdbcType=BIGINT},
+            </if>
+            <if test="toUserId != null">
+                #{toUserId,jdbcType=BIGINT},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="readFlag != null">
+                #{readFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="msgType != null">
+                #{msgType,jdbcType=INTEGER},
+            </if>
+            <if test="smallImg != null">
+                #{smallImg,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.hichat.common.pojo.MessageExample" resultType="java.lang.Integer">
+        select count(*) from h_message
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update h_message
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.fromUserId != null">
+                from_user_id = #{record.fromUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.toUserId != null">
+                to_user_id = #{record.toUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.message != null">
+                message = #{record.message,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.readFlag != null">
+                read_flag = #{record.readFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="record.msgType != null">
+                msg_type = #{record.msgType,jdbcType=INTEGER},
+            </if>
+            <if test="record.smallImg != null">
+                small_img = #{record.smallImg,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update h_message
+        set id = #{record.id,jdbcType=BIGINT},
+        from_user_id = #{record.fromUserId,jdbcType=BIGINT},
+        to_user_id = #{record.toUserId,jdbcType=BIGINT},
+        message = #{record.message,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        read_flag = #{record.readFlag,jdbcType=VARCHAR},
+        msg_type = #{record.msgType,jdbcType=INTEGER},
+        small_img = #{record.smallImg,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hichat.common.pojo.Message">
+        update h_message
+        <set>
+            <if test="fromUserId != null">
+                from_user_id = #{fromUserId,jdbcType=BIGINT},
+            </if>
+            <if test="toUserId != null">
+                to_user_id = #{toUserId,jdbcType=BIGINT},
+            </if>
+            <if test="message != null">
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="readFlag != null">
+                read_flag = #{readFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="msgType != null">
+                msg_type = #{msgType,jdbcType=INTEGER},
+            </if>
+            <if test="smallImg != null">
+                small_img = #{smallImg,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hichat.common.pojo.Message">
+    update h_message
+    set from_user_id = #{fromUserId,jdbcType=BIGINT},
+      to_user_id = #{toUserId,jdbcType=BIGINT},
+      message = #{message,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      read_flag = #{readFlag,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      small_img = #{smallImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="getMessage" resultMap="BaseResultMap">
+        select
+        msg.id,
+         msg.from_user_id,
+         msg.to_user_id,
+          msg.message,
+          msg.create_time,
+          msg.read_flag,
+          msg.msg_type,
+          msg.small_img,
+          fromUser.nickname as fromUserName,
+          toUser.nickname as toUserName
+        from h_message msg
+        left join h_user fromUser on fromUser.id=msg.from_user_id
+        left join h_user toUser on toUser.id=msg.to_user_id
+        where
+        (msg.from_user_id =#{userId} and msg.to_user_id=#{otherUserId})
+        OR
+        (msg.from_user_id =#{otherUserId} and msg.to_user_id=#{userId})
+        AND
+        msg.create_time <![CDATA[<=]]> #{time}
+        order BY msg.create_time DESC
+    </select>
+
+
+    <select id="getUsersMessage" resultType="com.hichat.common.dto.UsersMessagesDTO">
+        select * from (
+        SELECT
+        m.fromUser,
+        m.fromId,
+        m.toId,
+        m.toUser,
+        m.chatTime,
+        count(*) as rank
+        FROM
+        messageusers m
+        left join messageusers n on m.groupId=n.groupId
+        and m.chatTime<![CDATA[<=]]>n.chatTime
+        where 1=1
+        <if test="param.fromId != null and param.toId==null">
+            and (m.fromId =#{param.fromId} or m.toId=#{param.fromId})
+        </if>
+        <if test="param.fromId != null and param.toId !=null">
+            and (m.fromId =#{param.fromId} and m.toId=#{param.toId})
+            OR
+            (m.fromId =#{param.toId} and m.toId=#{param.fromId})
+        </if>
+        group by m.fromUser,m.toUser,m.chatTime
+        order by m.chatTime desc
+        ) s where s.rank = 1 order by s.chatTime asc
+    </select>
+
+
+</mapper>

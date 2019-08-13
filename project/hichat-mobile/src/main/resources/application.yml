@@ -1,0 +1,44 @@
+server:
+    port: 8323
+spring:
+  application:
+    name: hichat-mobile
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+
+eureka:
+  client:
+    registerWithEureka: true #是否将自己注册到Eureka服务中，默认为true
+    fetchRegistry:  true  #是否从Eureka中获取注册信息，默认为true
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址
+      defaultZone: http://127.0.0.1:8321/eureka/
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
+
+#个人自定义配置
+custom:
+  #图片上传
+  imgUploadPath: E:/hichat/
+  txImgPath: image/tx/
+  essayImgPath: image/essay/
+  messageImgPath: image/message/
+  #t-io通讯地址端口timeout
+  tioServerIp: 127.0.0.1
+  tioServerPort: 8082
+  tioTimeout: 0
+
+#ribbon请求连接的超时时间
+ribbon:
+  ConnectTimeout: 60000
+#请求处理的超时时间
+  ReadTimeout: 60000
+#对所有请求操作都进行重试
+  OkToRetryOnAllOperations: true
+#对当前服务的重试次数（第一次分配给9082的时候，如果404，则再重试MaxAutoRetries次，如果还是404，则切换到其他服务MaxAutoRetriesNextServer决定）
+  MaxAutoRetries: 0
+#切换服务的次数(比如本次请求分配给9082处理，发现404，则切换分配给9081处理，如果还是404，则返回404给客户端）
+  MaxAutoRetriesNextServer: 0

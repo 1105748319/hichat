@@ -1,0 +1,55 @@
+server:
+  port: 8322
+spring:
+  application:
+    name: hichat-provider
+  datasource:
+        druid:
+            url: jdbc:mysql://192.168.32.101:3306/hichat
+            username: root
+            password: hl.Data2018
+            driver-class-name: com.mysql.jdbc.Driver
+            filters: stat
+            minIdle: 1
+            pool-prepared-statements: true
+            max-open-prepared-statements: 20
+            test-on-return: false
+            test-on-borrow: false
+            test-while-idle: true
+            validation-query: select 'x'
+            min-evictable-idle-time-millis: 300000
+            time-between-eviction-runs-millis: 60000
+            max-active: 20
+            max-wait: 60000
+            initial-size: 1
+
+
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.hichat.common.pojo
+    configuration:
+      map-underscore-to-camel-case: true
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+eureka:
+  client:
+    registerWithEureka: true #是否将自己注册到Eureka服务中，默认为true
+    fetchRegistry:  true  #是否从Eureka中获取注册信息，默认为true
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址
+      #当有多个eureka服务端，则在后面加逗号加链接地址即可
+      defaultZone: http://127.0.0.1:8321/eureka/
+    eurekaServerConnectTimeoutSeconds: 60
+    eurekaServerReadTimeoutSeconds: 60
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
+    lease-expiration-duration-in-seconds: 30 #续约更新时间间隔（默认30秒）
+    lease-renewal-interval-in-seconds: 10 # 续约到期时间（默认90秒）
+    leaseRenewalIntervalInSeconds: 10

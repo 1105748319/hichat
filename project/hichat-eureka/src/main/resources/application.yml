@@ -1,0 +1,20 @@
+server:
+  port: 8321
+
+spring:
+   application:
+     name: hichat-eureka
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+  instance:
+    prefer-ip-address:  true
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port}
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
