@@ -24,4 +24,5 @@ public interface UserService {
 
     @RequestMapping(value = "/user/updateUser",method = RequestMethod.POST)
     ReturnResult<String> updateUser(@RequestBody User user);
+
 }

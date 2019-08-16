@@ -54,7 +54,7 @@ public class UserController {
             User resultUser = (User) loginResult.getData();
             String token = UUID.randomUUID().toString();
             String userJson = Json.toJson(resultUser);
-            redisUtil.set(token,userJson,7200l);
+            redisUtil.set(token, userJson, 7200l);
             return ReturnResult.ok(token);
         }
         return loginResult;
@@ -83,53 +83,54 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public ReturnResult getUserList(@RequestBody QueryData<UserExample> queryData)throws Exception{
+    public ReturnResult getUserList(@RequestBody QueryData<UserExample> queryData) throws Exception {
         ReturnResult result = userService.getUserList(queryData);
         return result;
     }
 
 
     @RequestMapping("/updateUser")
-    public ReturnResult updateUser(@RequestBody User user, HttpServletRequest request){
+    public ReturnResult updateUser(@RequestBody User user, HttpServletRequest request) {
         ReturnResult result = userService.updateUser(user);
-        if(result.getStatus()==200){
-            String token =(String) request.getAttribute("token");
+        if (result.getStatus() == 200) {
+            String token = (String) request.getAttribute("token");
             String userJson = Json.toJson(user);
-            redisUtil.set(token,userJson,7200l);
+            redisUtil.set(token, userJson, 7200l);
         }
         return result;
     }
 
 
     @RequestMapping("/logout")
-    public ReturnResult logout(HttpServletRequest request){
-        String token =(String) request.getAttribute("token");
+    public ReturnResult logout(HttpServletRequest request) {
+        String token = (String) request.getAttribute("token");
         redisUtil.remove(token);
         return ReturnResult.ok();
     }
 
 
     /**
-
      * 保存用户的头像并返回地址
-
      */
     @RequestMapping(value = "/saveUserHead/{imgType}/{md5}", method = RequestMethod.POST)
-    public ReturnResult saveUserHead(HttpServletRequest request, @PathVariable String imgType, @PathVariable String md5)throws Exception {
+    public ReturnResult saveUserHead(HttpServletRequest request, @PathVariable String imgType, @PathVariable String md5) throws Exception {
         InputStream inputStream = request.getInputStream();
         String genImageName = IDUtil.genImageName();
         int middlePath = FileUtil.getSavePath(constantProperties.getImgUploadPath() + constantProperties.getTxImgPath());
-        String path=constantProperties.getImgUploadPath()+constantProperties.getTxImgPath()+middlePath+"/"+genImageName+"."+imgType;
+        String path = constantProperties.getImgUploadPath() + constantProperties.getTxImgPath() + middlePath + "/" + genImageName + "." + imgType;
         boolean writeToFile = FileUtil.writeToFile(inputStream, path, md5);
         String headUrl = null;
         if (writeToFile) {
-            headUrl = constantProperties.getTxImgPath() +middlePath+"/"+ genImageName + "." + imgType;
+            headUrl = constantProperties.getTxImgPath() + middlePath + "/" + genImageName + "." + imgType;
+           /* if (id > 0) {
+                userService.updateUser(id ,avatar);
+            }*/
+
         } else {
             return ReturnResult.build(400, "头像生成失败");
         }
         return ReturnResult.ok(headUrl);
     }
-
 
 
 }

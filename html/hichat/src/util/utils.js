@@ -1,4 +1,5 @@
 import browserMD5File from 'browser-md5-file'
+import MD5File from './spark-md5.min'
 export function isEmpty(value){
   if (value == "" || value == null || value == undefined||value=={}||value=="undefined") {
     return true;
@@ -47,9 +48,41 @@ export  function getBinaryData(file, callback) {
   };
 }
 export  function getFileMd5(file, callback) {
-  browserMD5File(file, function (err, md5) {
+
+
+    var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
+      chunkSize = 2097152, // read in chunks of 2MB
+      chunks = Math.ceil(file.size / chunkSize),
+      currentChunk = 0,
+      spark = new SparkMD5.ArrayBuffer(),
+      frOnload = function(e){
+        //  log.innerHTML+="\nread chunk number "+parseInt(currentChunk+1)+" of "+chunks;
+        spark.append(e.target.result); // append array buffer
+        currentChunk++;
+        if (currentChunk < chunks)
+          loadNext();
+        else
+          callback(spark.end());
+          //log.innerHTML+="\n加载结束 :\n\n计算后的文件md5:\n"+spark.end()+"\n\n现在你可以选择另外一个文件!\n";
+      },
+      frOnerror = function () {
+        //log.innerHTML+="\糟糕，好像哪里错了.";
+      };
+    function loadNext() {
+      var fileReader = new FileReader();
+      fileReader.onload = frOnload;
+      fileReader.onerror = frOnerror;
+      var start = currentChunk * chunkSize,
+        end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+      fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
+    };
+
+    loadNext();
+
+
+  /*browserMD5File(file, function (err, md5) {
     callback(md5);
-  });
+  });*/
 }
 
 

@@ -120,7 +120,6 @@ public class FileUtil {
     public static int getSavePath(String headPath) {
         File dicFile = new File(headPath);
         File[] files = dicFile.listFiles(new FileFilter() {
-            @Override
             public boolean accept(File pathname) {
                 if (pathname.isDirectory()) {
                     return true;
