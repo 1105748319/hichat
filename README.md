@@ -1,10 +1,5 @@
 # springcloud-hichat（前后端分离）
 
-本人做的一个后台管理系统模板，进去瞧瞧。同样也是前后端分离（非微服务）https://gitee.com/gaojunjie03/base-project
-
-该项目分为：用户移动web端和后台web管理系统
-
-wiki已补上，具体的部署详情，开发详情请移步到wiki
 
 
 # 技术选型
