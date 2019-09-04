@@ -67,7 +67,7 @@
       },
       clipImage: function () {
         if (this.dataUrl == "") {
-          this.$f7.alert("您还没有选择照片上传", "hichat");
+          this.$f7.alert("您还没有选择照片上传", "医患平台");
           return;
         }
         this.clip = true;

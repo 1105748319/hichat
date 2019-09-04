@@ -3,7 +3,7 @@
     <div class="view">
       <div class="page">
         <div class="page-content login-screen-content">
-          <div class="login-screen-title">注册hichat账号</div>
+          <div class="login-screen-title">注册账号</div>
           <form>
             <div class="list-block">
               <ul>

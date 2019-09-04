@@ -84,7 +84,7 @@
       uploadImg(event) {
         let files = event.target.files
         if (files.length > 9) {
-          this.$f7.alert("最多只能选择9张图片", "hichat");
+          this.$f7.alert("最多只能选择9张图片", "医患平台");
           return;
         }
         this.$f7.showIndicator();
@@ -111,7 +111,7 @@
                         _self.essay.smallImgs += urls.smallUrl + ";";
                         _self.essay.imgs += urls.imgUrl + ";";
                       } else {
-                        _self.$f7.alert(data.msg, "hichat");
+                        _self.$f7.alert(data.msg, "医患平台");
                       }
                     })
                   })
@@ -129,14 +129,14 @@
       openPicture() {
         let array = this.essay.imgs.split(";");
         if (array.length == 10) {
-          this.$f7.alert("最多只能选择9张图片", "hichat");
+          this.$f7.alert("最多只能选择9张图片", "医患平台");
           return;
         }
         document.getElementById("openCamera").click();
       },
       saveContent() {
         if (isEmpty(this.essay.content)) {
-          this.$f7.alert("请输入内容", "hichat");
+          this.$f7.alert("请输入内容", "医患平台");
           return;
         }
         this.$emit("save-content", this.essay);

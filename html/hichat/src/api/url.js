@@ -1,5 +1,5 @@
 export const BASE_URL="/mobile"
-export const IMG_URL="http://localhost:8077"
+export const IMG_URL="http://60.165.143.216:8077"
 export const LOGIN_USER_URL="/user/login"
 export const REGISTER_USER_URL="/user/register"
 export const GET_USER_BY_TOKEN="/user/getByToken"

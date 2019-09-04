@@ -5,7 +5,7 @@
 const path = require('path')
 var proxyRoute = {
   '/mobile': {
-    target:'http://localhost:8320/mobile/',
+    target:'http://60.165.143.216:8320/mobile/',
     changeOrigin: true,
     pathRewrite: {
       '^/mobile': ''

@@ -38,7 +38,7 @@
     methods: {
       sendComment(value) {
         if (isEmpty(value)) {
-          this.$f7.alert("请输入评论内容", "hichat");
+          this.$f7.alert("请输入评论内容", "医患平台");
           return;
         }
         this.$f7.showIndicator();
@@ -49,14 +49,14 @@
           this.$f7.hideIndicator();
           if (data.status == 200) {
             let _self = this;
-            _self.$f7.alert("评论成功", "hichat", function () {
+            _self.$f7.alert("评论成功", "医患平台", function () {
               _self.$refs.publishChild.clearComment();
               _self.commentList = [];
               _self.getEssayComment(_self.essay.id, 1, 20);
             });
           }
           else {
-            this.$f7.alert(data.msg, "hichat");
+            this.$f7.alert(data.msg, "医患平台");
           }
         })
       },
@@ -86,7 +86,7 @@
 
             this.commentData = data;
           } else {
-            this.$f7.alert(data.msg, "hichat");
+            this.$f7.alert(data.msg, "医患平台");
           }
         })
       }

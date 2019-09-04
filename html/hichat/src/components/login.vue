@@ -3,7 +3,7 @@
     <div class="view">
       <div class="page">
         <div class="page-content login-screen-content">
-          <div class="login-screen-title">hichat</div>
+          <div class="login-screen-title">医患平台</div>
           <form>
             <div class="list-block">
               <ul>

@@ -110,7 +110,7 @@
             this.currentUser.avatar=headUrl;
             this.$f7.closeModal('#myUpload');
           }else{
-            this.$f7.alert(data.msg,"hichat");
+            this.$f7.alert(data.msg,"医患平台");
           }
         })
       },
@@ -119,10 +119,10 @@
         updateUser(JSON.stringify(this.currentUser)).then(data=>{
             this.$f7.hideIndicator();
             if(data.status==200){
-              this.$f7.alert("更新成功","hichat");
+              this.$f7.alert("更新成功","医患平台");
               this.$store.dispatch("initUser",this.currentUser);
             }else{
-                this.$f7.alert(data.msg,"hichat");
+                this.$f7.alert(data.msg,"医患平台");
             }
         })
       },
@@ -134,7 +134,7 @@
               Cookies.set("token","");
                 window.location.reload();
             }else{
-                this.$f7.alert(data.msg,"hichat");
+                this.$f7.alert(data.msg,"医患平台");
             }
         })
       },

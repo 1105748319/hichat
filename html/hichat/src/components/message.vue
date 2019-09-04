@@ -94,7 +94,7 @@
           }
         }
         else {
-          _self.$f7.alert("发送消息失败", "hichat");
+          _self.$f7.alert("发送消息失败", "医患平台");
         }
       };
       //获取双方聊天记录
@@ -127,7 +127,7 @@
                         _self.content = urls.imgUrl + ";" + urls.smallUrl;
                         _self.onSubmit("img");
                       } else {
-                        _self.$f7.alert(data.msg, "hichat");
+                        _self.$f7.alert(data.msg, "医患平台");
                       }
                     })
                   })
@@ -218,7 +218,7 @@
             }
             this.$f7.pullToRefreshDone();
           } else {
-            this.$f7.alert("获取聊天记录失败", "hichat");
+            this.$f7.alert("获取聊天记录失败", "医患平台");
           }
         })
       },
@@ -287,7 +287,7 @@
             if (data.status == 200) {
               this.websocket.send(json);
             } else {
-              this.$f7.alert(data.msg, "hichat");
+              this.$f7.alert(data.msg, "医患平台");
             }
           })
 

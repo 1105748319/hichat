@@ -44,7 +44,7 @@
             this.$f7.hideIndicator();
             this.contacts = groupBy(data.data.list, 'header');
           } else {
-            this.$f7.alert(data.msg, "hichat");
+            this.$f7.alert(data.msg, "医患平台");
           }
         });
       },
