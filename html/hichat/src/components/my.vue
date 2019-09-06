@@ -64,7 +64,7 @@
       </li>
 
     </ul>
-    <p><a href="#" class="button button-big button-fill color-gray" v-on:click="saveUser">保 存</a></p>
+    <p><a href="#" class="button button-big button-fill color-green" v-on:click="saveUser">保 存</a></p>
     <p><a href="#" class="button button-fill button-big color-red" v-on:click="quit">退 出</a></p>
 
     <pictureimg :from="'myUpload'" :from-clip="'myClip'" :from-file="'myFile'" :from-view="'myView'"
