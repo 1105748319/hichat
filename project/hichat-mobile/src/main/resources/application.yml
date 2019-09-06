@@ -22,13 +22,13 @@ eureka:
 #个人自定义配置
 custom:
   #图片上传
-  imgUploadPath: E:/hichat/
+  imgUploadPath: D:/hichat/
   txImgPath: image/tx/
   essayImgPath: image/essay/
   messageImgPath: image/message/
   #t-io通讯地址端口timeout
-  tioServerIp: 127.0.0.1
-  tioServerPort: 8082
+  tioServerIp: 192.168.9.20
+  tioServerPort: 8079
   tioTimeout: 0
 
 #ribbon请求连接的超时时间
