@@ -55,7 +55,7 @@
       <li>
         <div class="item-content">
           <div class="item-inner">
-            <div class="item-title label">个性签名</div>
+            <div class="item-title label">个人简介</div>
             <div class="item-input">
               <textarea v-model="currentUser.description">{{currentUser.description}}</textarea>
             </div>
