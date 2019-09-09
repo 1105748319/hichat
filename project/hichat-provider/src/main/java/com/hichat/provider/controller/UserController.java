@@ -33,6 +33,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ReturnResult register(@RequestBody User user) {
         ReturnResult result = userServiceImpl.register(user);
+
         return result;
     }
 

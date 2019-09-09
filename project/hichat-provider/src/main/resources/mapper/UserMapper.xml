@@ -96,7 +96,7 @@
       distinct
     </if>
     'true' as QUERYID,
-    <include refid="Base_Column_List" />
+    h_user.id, h_user.account, h_user.nickname, h_user.password, h_user.avatar, h_user.sex, h_user.description, h_user.header,h_user.create_time, h_user.update_time
     from h_user join h_role_permission
     WHERE h_role_permission.role_id= #{orderByClause,jdbcType=VARCHAR} and h_user.id = h_role_permission.permission_id
 

@@ -2,11 +2,13 @@ package com.hichat.provider.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hichat.common.pojo.RolePermission;
 import com.hichat.common.pojo.User;
 import com.hichat.common.pojo.UserExample;
 import com.hichat.common.util.ChinaInitial;
 import com.hichat.common.util.QueryData;
 import com.hichat.common.util.ReturnResult;
+import com.hichat.provider.mapper.RolePermissionMapper;
 import com.hichat.provider.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class UserServiceImpl {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
 
     public ReturnResult login(String account, String password) {
         UserExample example = new UserExample();
@@ -35,13 +40,26 @@ public class UserServiceImpl {
         return ReturnResult.build(400, "用户名或密码错误");
     }
 
-    @Transactional
+
     public ReturnResult register(User user) {
         ChinaInitial.setUserHeader(user);
         String password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(password);
         int insert = userMapper.insert(user);
-        if (insert > 0) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andAccountEqualTo(user.getAccount());
+        criteria.andPasswordEqualTo(password);
+        List<User> users = userMapper.selectByExample(example);
+        int insert1 = 0;
+        if(users.size()>0){
+            RolePermission rolePermission=new RolePermission();
+            rolePermission.setPermissionId(users.get(0).getId().intValue());
+            rolePermission.setRoleId(Integer.parseInt(user.getDescription()));
+            insert1 = rolePermissionMapper.insert(rolePermission);
+        }
+
+        if (insert > 0 && insert1>0) {
             return ReturnResult.ok();
         }
         return ReturnResult.build(400, "注册用户失败");
