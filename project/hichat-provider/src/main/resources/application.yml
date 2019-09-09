@@ -5,9 +5,9 @@ spring:
     name: hichat-provider
   datasource:
         druid:
-            url: jdbc:mysql://192.168.32.101:3306/hichat
+            url: jdbc:mysql://localhost:3306/hichat
             username: root
-            password: hl.Data2018
+            password: root
             driver-class-name: com.mysql.jdbc.Driver
             filters: stat
             minIdle: 1

@@ -43,6 +43,11 @@ public class UserController {
         ReturnResult result = userServiceImpl.getUserList(queryData);
         return result;
     }
+    @RequestMapping("/getUserRoleList")
+    public ReturnResult getUserRoleList(@RequestBody QueryData<UserExample> queryData){
+        ReturnResult result = userServiceImpl.getUserRoleList(queryData);
+        return result;
+    }
 
 
     @RequestMapping("/updateUser")

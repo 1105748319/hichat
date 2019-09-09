@@ -89,6 +89,18 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectByRole" resultMap="BaseResultMap" parameterType="com.hichat.common.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from h_user join h_role_permission
+    WHERE h_role_permission.role_id= #{orderByClause,jdbcType=VARCHAR} and h_user.id = h_role_permission.permission_id
+
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
