@@ -25,6 +25,9 @@ public class HystrixUserHandler implements UserService{
     @Override
     public ReturnResult getUserList(@RequestBody QueryData<UserExample> queryData) {
         return ReturnResult.build(400,"系统异常");
+    } @Override
+    public ReturnResult getUserRoleList(@RequestBody QueryData<UserExample> queryData) {
+        return ReturnResult.build(400,"系统异常");
     }
 
     @Override

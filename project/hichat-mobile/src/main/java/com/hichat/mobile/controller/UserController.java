@@ -87,6 +87,11 @@ public class UserController {
         ReturnResult result = userService.getUserList(queryData);
         return result;
     }
+    @RequestMapping("/getUserRoleList")
+    public ReturnResult getUserRoleList(@RequestBody QueryData<UserExample> queryData) throws Exception {
+        ReturnResult result = userService.getUserRoleList(queryData);
+        return result;
+    }
 
 
     @RequestMapping("/updateUser")

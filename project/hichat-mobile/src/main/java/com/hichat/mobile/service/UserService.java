@@ -21,6 +21,8 @@ public interface UserService {
 
     @RequestMapping("/user/getUserList")
     ReturnResult getUserList(@RequestBody QueryData<UserExample> queryData);
+    @RequestMapping("/user/getUserRoleList")
+    ReturnResult getUserRoleList(@RequestBody QueryData<UserExample> queryData);
 
     @RequestMapping(value = "/user/updateUser",method = RequestMethod.POST)
     ReturnResult<String> updateUser(@RequestBody User user);
