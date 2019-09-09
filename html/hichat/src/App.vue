@@ -9,8 +9,8 @@
             </f7-nav-right>
           </f7-navbar>
           <f7-toolbar tabbar labels>
-            <f7-link tab-link="#home" active @click="changeActiveTab('主页',1)"><i class="f7-icons">home</i><span
-              class="tabbar-label">主页</span></f7-link>
+            <f7-link tab-link="#home" active @click="changeActiveTab('公告',1)"><i class="f7-icons">home</i><span
+              class="tabbar-label">公告</span></f7-link>
             <f7-link tab-link="#contacts" @click="changeActiveTab('医生',2)"><i class="f7-icons">chats_fill</i><span
               class="tabbar-label">医生</span></f7-link>
             <f7-link tab-link="#zhongxin" @click="changeActiveTab('签约中心',3)"><i class="f7-icons">chats_fill</i><span
@@ -62,7 +62,7 @@
     export default {
         data() {
             return {
-                activeTab: "主页",
+                activeTab: "公告",
                 currentTab: 1
             }
         },

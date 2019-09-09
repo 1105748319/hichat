@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import {getUserList} from '../api/api'
+  import {getUserRoleList} from '../api/api'
   import groupBy from 'lodash/groupBy'
   import {IMG_URL} from '../api/url'
   export default {
@@ -32,14 +32,16 @@
       getContacts(){
         this.$f7.showIndicator();
         var obj = {
-          param: null,
+          param: {
+            orderByClause:"1001"
+          },
           pageInfo: {
             pageNum:1,
             pageSize:200
           }
         }
         var json=JSON.stringify(obj);
-        getUserList(json).then(data => {
+        getUserRoleList(json).then(data => {
           if (data.status == 200) {
             this.$f7.hideIndicator();
             this.contacts = groupBy(data.data.list, 'header');

@@ -41,6 +41,12 @@ export function getEssay(json){
 export function getUserList(json){
   return axiosIns.post(url.GET_CONTACTS_URL,json);
 }
+/*
+获取特定分组的用户列表
+ */
+export function getUserRoleList(json){
+  return axiosIns.post(url.GET_ROLR_URL,json);
+}
 
 /*
 发表评论

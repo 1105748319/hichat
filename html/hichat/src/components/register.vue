@@ -89,7 +89,8 @@
           account: "",
           password: "",
           sex: "",
-          avatar:""
+          avatar:"",
+          description:"1002"
         },
         avatarImg:""
       }
@@ -118,7 +119,7 @@
             this.user=Object.assign({},resetObj.user);
             this.$f7.closeModal('#register');
           }else{
-            this.$f7.alert(data.msg,"hichat");
+            this.$f7.alert(data.msg,"医患平台");
           }
 
         })
